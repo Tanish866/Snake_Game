@@ -8,7 +8,7 @@ body{
     text-align: center;
 }
 #game-arena{
-    width: 750px;
+    width: 600px;
     height: 600px;
     background-color: #333;
     position: relative;
@@ -16,4 +16,21 @@ body{
     margin-top: 40px;
     border: 5px solid #666;
     box-shadow: 0 0 20px rgba(0, 0, 0 0.5);
+}
+#Score-board{
+    font-size: x-large;
+    font-weight: bold;
+    color: black;
+    margin: 10px 0;
+}
+.Start-button{
+    background-color: orangered;
+    color: white;
+    padding: 15px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 18px;
+    margin: 4px 0;
 }
