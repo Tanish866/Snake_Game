@@ -24,6 +24,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
     function drawfoodAndSnake(){
         gameArena.innerHTML = ''; // if previously something is drawn remove it 
         // wipe out everything and redraw when snake is move
+
+        snake.forEach((snakeCell) => {
+            const element = drawDiv(snakeCell.x, snakeCell.y, 'snake');
+            gameArena.appendChild(element);
+        });
         const foodElement = drawDiv(food.x, food.y, "food");
         gameArena.appendChild(foodElement);
     }
@@ -31,6 +36,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         setInterval(() => {
             drawScoreBoard();
             drawfoodAndSnake();
+            // score++;
         }, 1000);
     }
     function runGame(){
