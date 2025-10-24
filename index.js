@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const cellSize = 20;
     let score = 0;
     let gameStarted = false;
-    let food = {x:200, y:300};
-    let snake = [{x:120, y:200}, {x:140, y:200}, {x:160, y:200}];
+    let food = {x:300, y:200};
+    let snake = [{x:160, y:200}, {x:140, y:200}, {x:120, y:200}];
     let dx = cellSize;
     let dy = 0;
 
@@ -32,11 +32,36 @@ document.addEventListener("DOMContentLoaded", ()=>{
         const foodElement = drawDiv(food.x, food.y, "food");
         gameArena.appendChild(foodElement);
     }
+
+    function moveFood(){
+        let newX, newY;
+        do{
+            newX = Math.floor(Math.random() * ((arenaSize - cellSize)/cellSize) * cellSize);
+            newY = Math.floor(Math.random() * ((arenaSize - cellSize)/cellSize) * cellSize);
+        }while(snake.some(snakeCell => (snakeCell.x == newX && snakeCell.y == newY)));
+
+        food = {x: newX, y:newY};
+    }
+    function updateSnake(){
+        // calculate new coordinate the snake head will go
+        const newHead = {x: snake[0].x + dx, y: snake[0].y + dy};
+        snake.unshift(newHead); // add new head
+        if(newHead.x == food.x && newHead.y == food.y){
+            // collission 
+            score+=5;
+            // don't pop the tail
+            moveFood();
+            // move the head
+        }
+        else{
+            snake.pop(); // remove the cell
+        }
+    }
     function gameLoop(){
         setInterval(() => {
+            updateSnake();
             drawScoreBoard();
             drawfoodAndSnake();
-            // score++;
         }, 1000);
     }
     function runGame(){
